@@ -997,5 +997,142 @@ class EncryptedMessageTest {
 
 	}
 
+	@Test
+	void noChangeEncryption() {
+
+		String msg = "BCDEFG";
+		String key = "A";
+
+		EncryptedMessage encryptedMsg = new EncryptedMessage(msg);
+
+		// test getMessage
+		try {
+			assertEquals("BCDEFG", encryptedMsg.getMessage());
+		} catch (Exception e) {
+			fail("Unexpected exception.");
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	void noChangeDecryption() {
+
+		String msg = "BCDEFG";
+		String key = "A";
+
+		EncryptedMessage encryptedMsg = new EncryptedMessage(msg);
+
+		// test decryption
+		try {
+			assertEquals("BCDEFG", encryptedMsg.decryptMessage(key.toString()));
+		} catch (Exception e) {
+			fail("Unexpected exception.");
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	void noRolloverEncryption() {
+
+		String msg = "BCDEFG";
+		String key = "C";
+
+		EncryptedMessage encryptedMsg = new EncryptedMessage(msg);
+
+		// test getMessage
+		try {
+			assertEquals("DFGHIJ", encryptedMsg.getMessage());
+		} catch (Exception e) {
+			fail("Unexpected exception.");
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	void noRolloverDecryption() {
+
+		String msg = "BCDEFG";
+		String key = "C";
+
+		EncryptedMessage encryptedMsg = new EncryptedMessage(msg);
+
+		// test decryption
+		try {
+			assertEquals("BCDEFG", encryptedMsg.decryptMessage(key.toString()));
+		} catch (Exception e) {
+			fail("Unexpected exception.");
+			e.printStackTrace();
+		}
+	}
 	
+	@Test
+	void rolloverEncryption() {
+
+		String msg = "XYZABC";
+		String key = "CCCZZZ";
+
+		EncryptedMessage encryptedMsg = new EncryptedMessage(msg);
+
+		// test getMessage
+		try {
+			assertEquals("ZABZAB", encryptedMsg.getMessage());
+		} catch (Exception e) {
+			fail("Unexpected exception.");
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	void rolloverDecryption() {
+
+		String msg = "XYZABC";
+		String key = "CCCZZZ";
+
+		EncryptedMessage encryptedMsg = new EncryptedMessage(msg);
+
+		// test decryption
+		try {
+			assertEquals("ZABZAB", encryptedMsg.decryptMessage(key.toString()));
+		} catch (Exception e) {
+			fail("Unexpected exception.");
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@Test
+	void decryptWithWrongKey() {
+
+		String msg = "BCDEFG";
+		String key = "CAB";
+
+		EncryptedMessage encryptedMsg = new EncryptedMessage(msg);
+
+		// test decryption
+		try {
+			assertEquals("BCDEFG", encryptedMsg.decryptMessage(key));
+		} catch (Exception e) {
+			fail("Unexpected exception.");
+			e.printStackTrace();
+		}
+		
+		// test wrong decryption that doesn't change
+		try {
+			assertEquals("DCEGFH", encryptedMsg.decryptMessage("A"));
+		} catch (Exception e) {
+			fail("Unexpected exception.");
+			e.printStackTrace();
+		}
+
+		// test wrong decryption that doesn't change
+		try {
+			assertEquals("DFGHIJ", encryptedMsg.decryptMessage("B"));
+		} catch (Exception e) {
+			fail("Unexpected exception.");
+			e.printStackTrace();
+		}
+
+	}
+	
+
 }
