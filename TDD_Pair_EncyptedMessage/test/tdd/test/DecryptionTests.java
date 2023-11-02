@@ -78,7 +78,7 @@ class DecryptionTests {
 		String msg = null;
 		String key = "A";
 
-		EncryptedMessage encryptedMsg = new EncryptedMessage(msg.toString(), key);
+		EncryptedMessage encryptedMsg = new EncryptedMessage(msg, key);
 
 		// test decryption
 		Throwable exception = assertThrows(Exception.class, () -> encryptedMsg.decryptMessage(key));
@@ -342,7 +342,7 @@ class DecryptionTests {
 
 		// test decryption
 		try {
-			assertEquals(msg.toString(), encryptedMsg.decryptMessage(key.toString()));
+			assertEquals(msg.toUpperCase(), encryptedMsg.decryptMessage(key.toString()));
 		} catch (Exception e) {
 			fail("Unexpected exception.");
 			e.printStackTrace();
@@ -359,7 +359,7 @@ class DecryptionTests {
 
 		// test decryption
 		try {
-			assertEquals(msg.toString(), encryptedMsg.decryptMessage(key.toString()));
+			assertEquals(msg.toUpperCase(), encryptedMsg.decryptMessage(key.toString()));
 		} catch (Exception e) {
 			fail("Unexpected exception.");
 			e.printStackTrace();
@@ -405,7 +405,7 @@ class DecryptionTests {
 
 	@Test
 	void mixedCharMsgDecryption() {
-		String msg = "HE110 THERE!";
+		String msg = "HE11O THERE!";
 		String key = "B";
 		EncryptedMessage encryptedMsg = new EncryptedMessage(msg, key);
 
@@ -545,7 +545,7 @@ class DecryptionTests {
 		String msg = "BCDEFG";
 		String key = "C";
 
-		EncryptedMessage encryptedMsg = new EncryptedMessage(msg);
+		EncryptedMessage encryptedMsg = new EncryptedMessage(msg, key);
 
 		// test decryption
 		try {
@@ -562,11 +562,11 @@ class DecryptionTests {
 		String msg = "XYZABC";
 		String key = "CCCZZZ";
 
-		EncryptedMessage encryptedMsg = new EncryptedMessage(msg);
+		EncryptedMessage encryptedMsg = new EncryptedMessage(msg,key);
 
 		// test decryption
 		try {
-			assertEquals("ZABZAB", encryptedMsg.decryptMessage(key.toString()));
+			assertEquals("XYZABC", encryptedMsg.decryptMessage(key));
 		} catch (Exception e) {
 			fail("Unexpected exception.");
 			e.printStackTrace();
@@ -580,7 +580,7 @@ class DecryptionTests {
 		String msg = "BCDEFG";
 		String key = "CAB";
 
-		EncryptedMessage encryptedMsg = new EncryptedMessage(msg);
+		EncryptedMessage encryptedMsg = new EncryptedMessage(msg, key);
 
 		// test decryption
 		try {
@@ -600,7 +600,7 @@ class DecryptionTests {
 
 		// test wrong decryption that doesn't change
 		try {
-			assertEquals("CVDFEG", encryptedMsg.decryptMessage("B"));
+			assertEquals("CBDFEG", encryptedMsg.decryptMessage("B"));
 		} catch (Exception e) {
 			fail("Unexpected exception.");
 			e.printStackTrace();
