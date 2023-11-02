@@ -794,12 +794,208 @@ class EncryptedMessageTest {
 
 		// test decryption
 		try {
-			assertEquals("HEOTHERE", encryptedMsg.decryptMessage(key.toString()));
+			assertEquals("HEOTHERE", encryptedMsg.decryptMessage(key));
 		} catch (Exception e) {
 			fail("Unexpected exception.");
 			e.printStackTrace();
 		}
 
 	}
+	
+	@Test
+	void uppercaseEncryptedMsgEncryption() {
+
+		String msg = "CDEFGH";
+		String key = "B";
+
+		EncryptedMessage encryptedMsg = new EncryptedMessage(msg);
+
+		// test getMessage
+		try {
+			assertEquals(msg, encryptedMsg.getMessage());
+		} catch (Exception e) {
+			fail("Unexpected exception.");
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	void upperCaseEncryptedMsgDecryption() {
+
+		String msg = "CDEFGH";
+		String key = "B";
+
+		EncryptedMessage encryptedMsg = new EncryptedMessage(msg);
+
+		// test decryption
+		try {
+			assertEquals("BCDEFG", encryptedMsg.decryptMessage(key.toString()));
+		} catch (Exception e) {
+			fail("Unexpected exception.");
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	void lowercaseEncryptedMsgEncryption() {
+
+		String msg = "cdefgh";
+		String key = "B";
+
+		EncryptedMessage encryptedMsg = new EncryptedMessage(msg);
+
+		// test getMessage
+		try {
+			assertEquals("CDEFGH", encryptedMsg.getMessage());
+		} catch (Exception e) {
+			fail("Unexpected exception.");
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	void lowercaseEncryptedMsgDecryption() {
+
+		String msg = "cdefgh";
+		String key = "B";
+
+		EncryptedMessage encryptedMsg = new EncryptedMessage(msg);
+
+		// test decryption
+		try {
+			assertEquals("BCDEFG", encryptedMsg.decryptMessage(key.toString()));
+		} catch (Exception e) {
+			fail("Unexpected exception.");
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	void mixedCaseEncryptedMsgEncryption() {
+
+		String msg = "CdefGh";
+		String key = "B";
+
+		EncryptedMessage encryptedMsg = new EncryptedMessage(msg);
+
+		// test getMessage
+		try {
+			assertEquals("CDEFGH", encryptedMsg.getMessage());
+		} catch (Exception e) {
+			fail("Unexpected exception.");
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	void mixedCaseEncryptedMsgDecryption() {
+
+		String msg = "CdefGh";
+		String key = "B";
+
+		EncryptedMessage encryptedMsg = new EncryptedMessage(msg);
+
+		// test decryption
+		try {
+			assertEquals("BCDEFG", encryptedMsg.decryptMessage(key.toString()));
+		} catch (Exception e) {
+			fail("Unexpected exception.");
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	void numberEncryptedMsgEncryption() {
+		String msg = "43255";
+		String key = "B";
+		EncryptedMessage encryptedMsg = new EncryptedMessage(msg);
+
+		// test getMessage
+		Throwable exception = assertThrows(Exception.class, () -> encryptedMsg.getMessage());
+		assertEquals("Unauthorized use.", exception.getMessage());
+
+	}
+
+	@Test
+	void numberEncryptedMsgDecryption() {
+		String msg = "43255";
+		String key = "B";
+		EncryptedMessage encryptedMsg = new EncryptedMessage(msg);
+
+		// test decryption
+		Throwable exception = assertThrows(Exception.class, () -> encryptedMsg.decryptMessage(key));
+		assertEquals("Unauthorized use.", exception.getMessage());
+	}
+
+	@Test
+	void punctuationEncryptedMsgEncryption() {
+		String msg = "#%&!";
+		String key = "B";
+		EncryptedMessage encryptedMsg = new EncryptedMessage(msg);
+
+		// test getMessage
+		Throwable exception = assertThrows(Exception.class, () -> encryptedMsg.getMessage());
+		assertEquals("Unauthorized use.", exception.getMessage());
+
+	}
+
+	@Test
+	void punctuationEncryptedMsgDecryption() {
+		String msg = "#%&!";
+		String key = "B";
+		EncryptedMessage encryptedMsg = new EncryptedMessage(msg);
+
+		// test decryption
+		Throwable exception = assertThrows(Exception.class, () -> encryptedMsg.decryptMessage(key));
+		assertEquals("Unauthorized use.", exception.getMessage());
+	}
+
+	@Test
+	void spaceEncryptedMsgEncryption() {
+		String msg = "    ";
+		String key = "B";
+		EncryptedMessage encryptedMsg = new EncryptedMessage(msg);
+
+		// test getMessage
+		Throwable exception = assertThrows(Exception.class, () -> encryptedMsg.getMessage());
+		assertEquals("Unauthorized use.", exception.getMessage());
+
+	}
+
+	@Test
+	void spaceEncryptedMsgDecryption() {
+		String msg = "    ";
+		String key = "B";
+		EncryptedMessage encryptedMsg = new EncryptedMessage(msg);
+
+		// test decryption
+		Throwable exception = assertThrows(Exception.class, () -> encryptedMsg.decryptMessage(key));
+		assertEquals("Unauthorized use.", exception.getMessage());
+	}
+	
+	@Test
+	void mixedCharEncryptedMsgEncryption() {
+		String msg = "HE110 THERE!";
+		String key = "B";
+		EncryptedMessage encryptedMsg = new EncryptedMessage(msg);
+
+		// test getMessage
+		Throwable exception = assertThrows(Exception.class, () -> encryptedMsg.getMessage());
+		assertEquals("Unauthorized use.", exception.getMessage());
+
+	}
+
+	@Test
+	void mixedCharEncryptedMsgDecryption() {
+		String msg = "HE110 THERE!";
+		String key = "B";
+		EncryptedMessage encryptedMsg = new EncryptedMessage(msg);
+
+		// test decryption
+		Throwable exception = assertThrows(Exception.class, () -> encryptedMsg.decryptMessage(key));
+		assertEquals("Unauthorized use.", exception.getMessage());
+
+	}
+
 	
 }
