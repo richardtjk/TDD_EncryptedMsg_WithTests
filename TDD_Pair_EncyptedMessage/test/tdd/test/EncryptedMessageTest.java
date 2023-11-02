@@ -177,7 +177,7 @@ class EncryptedMessageTest {
 
 		// test getMessage
 		try {
-			assertEquals("BDD", encryptedMsg.getMessage());
+			assertEquals("BED", encryptedMsg.getMessage());
 		} catch (Exception e) {
 			fail("Unexpected exception.");
 			e.printStackTrace();
@@ -417,7 +417,7 @@ class EncryptedMessageTest {
 
 	@Test
 	void mixedCharMsgEncryption() {
-		String msg = "HE110 THERE!";
+		String msg = "HE11O THERE!";
 		String key = "B";
 		EncryptedMessage encryptedMsg = new EncryptedMessage(msg, key);
 
@@ -561,11 +561,11 @@ class EncryptedMessageTest {
 		String msg = "BCDEFG";
 		String key = "C";
 
-		EncryptedMessage encryptedMsg = new EncryptedMessage(msg);
+		EncryptedMessage encryptedMsg = new EncryptedMessage(msg, key);
 
 		// test getMessage
 		try {
-			assertEquals("DFGHIJ", encryptedMsg.getMessage());
+			assertEquals("DEFGHI", encryptedMsg.getMessage());
 		} catch (Exception e) {
 			fail("Unexpected exception.");
 			e.printStackTrace();
@@ -579,7 +579,7 @@ class EncryptedMessageTest {
 		String msg = "XYZABC";
 		String key = "CCCZZZ";
 
-		EncryptedMessage encryptedMsg = new EncryptedMessage(msg);
+		EncryptedMessage encryptedMsg = new EncryptedMessage(msg, key);
 
 		// test getMessage
 		try {
