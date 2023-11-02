@@ -1126,7 +1126,7 @@ class EncryptedMessageTest {
 
 		// test wrong decryption that doesn't change
 		try {
-			assertEquals("DFGHIJ", encryptedMsg.decryptMessage("B"));
+			assertEquals("CVDFEG", encryptedMsg.decryptMessage("B"));
 		} catch (Exception e) {
 			fail("Unexpected exception.");
 			e.printStackTrace();
